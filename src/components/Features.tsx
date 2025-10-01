@@ -29,7 +29,7 @@ export function Features() {
         <p className="section-desc">モダンなスタックで、成果に直結する体験を。</p>
         <div className="grid-4">
           {items.map((f) => (
-            <div className="card feature" key={f.title}>
+            <div className="card feature tilt" key={f.title}>
               <div className="icon" aria-hidden>{f.icon}</div>
               <h3>{f.title}</h3>
               <p>{f.desc}</p>
@@ -40,4 +40,3 @@ export function Features() {
     </section>
   )
 }
-

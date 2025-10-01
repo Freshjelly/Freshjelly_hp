@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 
 type Props = {
   theme: 'light' | 'dark'
@@ -10,7 +10,7 @@ export function Navbar({ theme, onToggle }: Props) {
     <header className="nav">
       <div className="container nav-row">
         <Link to="/" className="brand" aria-label="Freshjelly Home">
-          <img src="/logo.svg" width={140} height={32} alt="Freshjelly" />
+          <img src="/logo.svg" width={160} height={32} alt="Freshjelly" />
         </Link>
         <nav className="menu" aria-label="主要ナビゲーション">
           <NavLink to="/services" className={({isActive}) => isActive ? 'active' : ''}>サービス</NavLink>
