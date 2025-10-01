@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Navbar } from './components/Navbar'
-import { Footer } from './components/Footer'
-import { Hero } from './components/Hero'
-import { Features } from './components/Features'
-import { Pricing } from './components/Pricing'
-import { Testimonials } from './components/Testimonials'
-import { Cta } from './components/Cta'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Layout } from './components/Layout'
+import { Home } from './pages/Home'
+import { Services } from './pages/Services'
+import { Works } from './pages/Works'
+import { About } from './pages/About'
+import { Contact } from './pages/Contact'
 
 export default function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -21,17 +21,16 @@ export default function App() {
   }, [theme])
 
   return (
-    <>
-      <Navbar theme={theme} onToggle={() => setTheme(theme === 'light' ? 'dark' : 'light')} />
-      <main>
-        <Hero />
-        <Features />
-        <Pricing />
-        <Testimonials />
-        <Cta />
-      </main>
-      <Footer />
-    </>
+    <BrowserRouter>
+      <Layout theme={theme} onToggle={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/works" element={<Works />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   )
 }
-

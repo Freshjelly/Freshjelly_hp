@@ -1,3 +1,5 @@
+import { NavLink, Link } from 'react-router-dom'
+
 type Props = {
   theme: 'light' | 'dark'
   onToggle: () => void
@@ -7,22 +9,22 @@ export function Navbar({ theme, onToggle }: Props) {
   return (
     <header className="nav">
       <div className="container nav-row">
-        <a href="#" className="brand" aria-label="Freshjelly Home">
+        <Link to="/" className="brand" aria-label="Freshjelly Home">
           <img src="/logo.svg" width={140} height={32} alt="Freshjelly" />
-        </a>
+        </Link>
         <nav className="menu" aria-label="主要ナビゲーション">
-          <a href="#features">特徴</a>
-          <a href="#pricing">料金</a>
-          <a href="#contact">お問い合わせ</a>
+          <NavLink to="/services" className={({isActive}) => isActive ? 'active' : ''}>サービス</NavLink>
+          <NavLink to="/works" className={({isActive}) => isActive ? 'active' : ''}>実績</NavLink>
+          <NavLink to="/about" className={({isActive}) => isActive ? 'active' : ''}>私たち</NavLink>
+          <NavLink to="/contact" className={({isActive}) => isActive ? 'active' : ''}>お問い合わせ</NavLink>
         </nav>
         <div className="nav-actions">
           <button className="btn ghost" onClick={onToggle} aria-label="テーマ切り替え">
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
-          <a className="btn primary" href="#contact">無料で始める</a>
+          <Link className="btn primary" to="/contact">無料で始める</Link>
         </div>
       </div>
     </header>
   )
 }
-
