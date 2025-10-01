@@ -18,7 +18,7 @@ export function Works() {
         <p className="section-desc">公開可能な事例の一部をご紹介します。</p>
         <div className="grid-3">
           {works.map((w) => (
-            <article className="card" key={w.title}>
+            <article className="card tilt" key={w.title}>
               <div className="thumb" aria-hidden>
                 <div className="skeleton" />
               </div>
@@ -36,4 +36,3 @@ export function Works() {
     </section>
   )
 }
-

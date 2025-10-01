@@ -24,7 +24,7 @@ export function Services() {
         <p className="section-desc">戦略から設計、実装、グロースまで伴走します。</p>
         <div className="grid-3">
           {services.map((s) => (
-            <div className="card" key={s.title}>
+            <div className="card tilt" key={s.title}>
               <h3>{s.title}</h3>
               <p className="muted">{s.desc}</p>
               <ul className="list">
@@ -39,4 +39,3 @@ export function Services() {
     </section>
   )
 }
-
