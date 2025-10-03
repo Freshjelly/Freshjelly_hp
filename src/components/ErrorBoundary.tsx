@@ -1,31 +1,60 @@
 import { Component, ReactNode, ErrorInfo } from 'react'
 
+/**
+ * ErrorBoundaryコンポーネントのプロパティ型定義
+ */
 type Props = {
+  /** エラーバウンダリで保護する子要素 */
   children: ReactNode
 }
 
+/**
+ * ErrorBoundaryコンポーネントの状態型定義
+ */
 type State = {
+  /** エラーが発生したかどうか */
   hasError: boolean
+  /** 発生したエラーオブジェクト */
   error: Error | null
 }
 
+/**
+ * ErrorBoundaryコンポーネント
+ *
+ * React コンポーネントツリー内のエラーをキャッチし、
+ * フォールバックUIを表示するエラーハンドリングコンポーネントです。
+ *
+ * @example
+ * ```tsx
+ * <ErrorBoundary>
+ *   <App />
+ * </ErrorBoundary>
+ * ```
+ */
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = { hasError: false, error: null }
   }
 
+  /**
+   * エラーが発生した時に呼ばれ、状態を更新する
+   */
   static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error }
   }
 
+  /**
+   * エラーをログに記録する
+   * 開発環境ではコンソールに出力、本番環境ではエラートラッキングサービスに送信
+   */
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Log errors in development
+    // 開発環境でのみコンソールにログ出力
     if (import.meta.env.DEV) {
       console.error('ErrorBoundary caught an error:', error, errorInfo)
     }
-    // In production, send to error tracking service
-    // Example: Sentry.captureException(error, { extra: errorInfo })
+    // 本番環境ではエラートラッキングサービスに送信
+    // 例: Sentry.captureException(error, { extra: errorInfo })
   }
 
   render() {
