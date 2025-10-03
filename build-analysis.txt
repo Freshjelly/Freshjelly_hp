@@ -1,0 +1,13 @@
+
+> freshjelly-web@0.1.0 build
+> tsc -b && vite build
+
+vite v5.4.20 building for production...
+transforming...
+✓ 46 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   1.05 kB │ gzip:  0.59 kB
+dist/assets/index-DLTk1QlL.css   11.30 kB │ gzip:  3.25 kB
+dist/assets/index-DIVT_EAf.js   178.07 kB │ gzip: 59.03 kB
+✓ built in 579ms

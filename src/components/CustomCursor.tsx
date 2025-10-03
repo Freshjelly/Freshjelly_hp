@@ -12,12 +12,26 @@ import { useEffect, useState } from 'react'
  * ```
  */
 export function CustomCursor() {
+  // モバイルではレンダリングしない（パフォーマンス最適化）
+  const [isDesktop, setIsDesktop] = useState(false)
   // カーソルの現在位置
   const [position, setPosition] = useState({ x: 0, y: 0 })
   // カーソルがクリック可能な要素の上にあるかどうか
   const [isPointer, setIsPointer] = useState(false)
 
   useEffect(() => {
+    // デスクトップデバイスかチェック（768px以上 & タッチ非対応）
+    const checkDevice = () => {
+      setIsDesktop(window.innerWidth > 768 && !('ontouchstart' in window))
+    }
+    checkDevice()
+    window.addEventListener('resize', checkDevice)
+    return () => window.removeEventListener('resize', checkDevice)
+  }, [])
+
+  useEffect(() => {
+    if (!isDesktop) return
+
     /**
      * マウス移動イベントハンドラ
      * カーソルの位置を更新し、ホバー中の要素に応じてスタイルを変更
@@ -40,7 +54,10 @@ export function CustomCursor() {
 
     // クリーンアップ処理
     return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
+  }, [isDesktop])
+
+  // モバイルでは何も表示しない
+  if (!isDesktop) return null
 
   return (
     <>
