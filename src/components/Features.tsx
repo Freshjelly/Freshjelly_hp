@@ -15,9 +15,10 @@ const items = [
     icon: '📱'
   },
   {
-    title: 'アクセシビリティ',
-    desc: '誰もが使いやすいUI/UX設計を意識。',
-    icon: '♿'
+    title: 'Space Invaders',
+    desc: 'Canvas APIで作ったレトロゲーム。遊んでみよう！',
+    icon: '🎮',
+    link: '/game'
   }
 ]
 
@@ -28,13 +29,21 @@ export function Features() {
         <h2>選ばれる理由</h2>
         <p className="section-desc">モダンなスタックで、成果に直結する体験を。</p>
         <div className="grid-4">
-          {items.map((f) => (
-            <div className="card feature tilt" key={f.title}>
-              <div className="icon" aria-hidden>{f.icon}</div>
-              <h3>{f.title}</h3>
-              <p>{f.desc}</p>
-            </div>
-          ))}
+          {items.map((f) => {
+            const Component = f.link ? 'a' : 'div'
+            return (
+              <Component
+                className="card feature tilt"
+                key={f.title}
+                {...(f.link ? { href: f.link } : {})}
+                style={f.link ? { textDecoration: 'none', color: 'inherit' } : {}}
+              >
+                <div className="icon" aria-hidden>{f.icon}</div>
+                <h3>{f.title}</h3>
+                <p>{f.desc}</p>
+              </Component>
+            )
+          })}
         </div>
       </div>
     </section>
